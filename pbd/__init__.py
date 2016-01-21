@@ -75,8 +75,8 @@ class Pbd():
         """Dump single field.
         """
         v = {}
-        v['label'] = Repb.LABELS[fd.label]
-        v['type'] = fd.type_name if len(fd.type_name) > 0 else Repb.TYPES[fd.type]
+        v['label'] = Pbd.LABELS[fd.label]
+        v['type'] = fd.type_name if len(fd.type_name) > 0 else Pbd.TYPES[fd.type]
         v['name'] = fd.name
         v['number'] = fd.number
         v['default'] = '[default = {}]'.format(fd.default_value) if len(fd.default_value) > 0 else ''
@@ -202,8 +202,31 @@ def main():
     
     args = parser.parse_args()
     
+    if args.file is None and args.dir is None:
+        print '[!] Please specify input file or directory!'
+        sys.exit(-1)
+    
     if args.file is not None:
-        parse_file(file, out)
+        print '[+] Paring file {}'.format(args.file)
+        p = Pbd(args.file)
+        p.disassemble()
+        p.dump(args.outdir)
+        print '[+] Proto file saved as {}'.format(os.path.join(args.outdir, p.name))
+    elif args.dir is not None:
+        files = [os.path.join(args.dir, f) for f in os.listdir(args.dir) if os.path.isfile(os.path.join(args.dir, f))]
+
+        proto = []
+        for f in files:
+            print '[+] Paring file {}'.format(f)        
+            p = Pbd(f)
+            p.disassemble()
+            proto.append(p)
+        
+        print '[+] Fixing imports...'        
+        for p in proto: p.find_imports(proto)
+        
+        print '[+] Dumping files...'
+        for p in proto: p.dump(args.outdir)
 # end-of-function main
     
 
