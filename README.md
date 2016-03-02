@@ -87,3 +87,6 @@ Disasm all files in given directory and fix imports.
 ```sh
 python -m pbd -i input_dir\ -o output_dir\
 ```
+
+## License
+Code is released under [MIT license](https://github.com/rsc-dev/loophole/blob/master/LICENSE.md) © [Radoslaw '[rsc]' Matusiak](https://rm2084.blogspot.com/).
