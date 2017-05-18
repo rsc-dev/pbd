@@ -1,5 +1,7 @@
 # Pbd - Protocol Buffers Disassembler
 
+[![Join the chat at https://gitter.im/rsc-dev/pbd](https://badges.gitter.im/rsc-dev/pbd.svg)](https://gitter.im/rsc-dev/pbd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## About
 Pbd is a Python module to disassemble serialized protocol buffers descriptors (https://developers.google.com/protocol-buffers/).
 
