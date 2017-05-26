@@ -121,9 +121,10 @@ class Pbd():
             'output_type': ('stream ' if m.server_streaming else '') + m.output_type,
         }
         
-        f = 'rpc {name}({input_type}) returns ({name}) {}'.format(**v)
+        f = 'rpc {name}({input_type}) returns ({output_type}) {{'.format(**v)
         f = ' '.join(f.split())
         self._print(f)
+        self._print('}')
         
         self.uses.append(m.input_type)
         self.uses.append(m.output_type)
