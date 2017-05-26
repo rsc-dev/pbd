@@ -111,7 +111,41 @@ class Pbd():
         self.tabs-=1
         self._print('}')
     # end-of-method _dump_messages  
-    
+
+    def _dump_method(self, m):
+        """Dump single method.
+        """
+        v = {
+            'name': m.name,
+            'input_type': ('stream ' if m.client_streaming else '') + m.input_type,
+            'output_type': ('stream ' if m.server_streaming else '') + m.output_type,
+        }
+        
+        f = 'rpc {name}({input_type}) returns ({name}) {}'.format(**v)
+        f = ' '.join(f.split())
+        self._print(f)
+        
+        self.uses.append(m.input_type)
+        self.uses.append(m.output_type)
+    # end-of-method _dump_method
+        
+    def _dump_service(self, s, top=''):
+        """Dump single service type.
+        
+        Keyword arguments:
+        top -- top namespace
+        """
+        self._print()
+        self._print('service {} {{'.format(s.name))
+        self.tabs+=1
+        
+        for m in s.method:
+            self._dump_method(m)
+        
+        self.tabs-=1
+        self._print('}')
+    # end-of-method _dump_service
+
     def _walk(self, fd):
         """Walk and dump (disasm) descriptor.
         """
@@ -119,6 +153,7 @@ class Pbd():
         
         for e in fd.enum_type: self._dump_enum(e, top)
         for m in fd.message_type: self. _dump_message(m, top)
+        for s in fd.service: self. _dump_service(s, top)
     # end-of-method _walk   
     
     def disassemble(self):
