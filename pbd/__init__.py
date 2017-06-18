@@ -131,7 +131,9 @@ class Pbd():
         self.name = fd.name
         
         self._print('// Reversed by pbd (https://github.com/rsc-dev/pbd)')
-
+        self._print('syntax = "proto2";')
+        self._print('')
+        
         if len(fd.package) > 0:
             self._print('package {};'.format(fd.package))
             self.package = fd.package
