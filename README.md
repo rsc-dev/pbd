@@ -1,5 +1,6 @@
 # Pbd - Protocol Buffers Disassembler
 
+[![PyPI](https://img.shields.io/pypi/v/pbd.svg)](https://pypi.python.org/pypi/pbd)
 [![Join the chat at https://gitter.im/rsc-dev/pbd](https://badges.gitter.im/rsc-dev/pbd.svg)](https://gitter.im/rsc-dev/pbd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## About
